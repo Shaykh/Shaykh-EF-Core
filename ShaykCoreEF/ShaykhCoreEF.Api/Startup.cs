@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-// Add the System.Data.SqlClient using statement
+using System.Data.SqlClient;
 // Add the ShaykhCoreEF.DataAccess.Services using statement
 
 namespace ShaykhCoreEF.Api
@@ -26,9 +26,13 @@ namespace ShaykhCoreEF.Api
         {
             // Add the OrderService DI registration code
 
-            // Add the SqlConnectionStringBuilder code
+            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("ShaykhCoreEF"));
+            IConfigurationSection ShaykhCoreEFCredentials = Configuration.GetSection("ShaykhCoreEFCredentials");
 
-            // Add the UseSqlServer code
+            builder.UserID = ShaykhCoreEFCredentials["UserId"];
+            builder.Password = ShaykhCoreEFCredentials["Password"];
+
+            services.AddDbContext<ShaykhCoreEFContext>(options => options.UseSqlServer(builder.ConnectionString));
 
             services.AddControllers();
             services.AddApplicationInsightsTelemetry();
