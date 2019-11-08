@@ -39,7 +39,10 @@ namespace ShaykhCoreEF.DataAccess.Services
             return orders;
         }
 
-        private IQueryable<Order> GetOrderById(int id) => _context.Orders.AsNoTracking().Where(o => o.Id == id);
+        private IQueryable<Order> GetOrderById(int id) => 
+            _context.Orders.AsNoTracking()
+            .TagWith(nameof(GetOrderById))
+            .Where(o => o.Id == id);
 
         public async Task<CustomerOrder> GetById(int id)
         {
@@ -56,7 +59,9 @@ namespace ShaykhCoreEF.DataAccess.Services
                         ProductQuantity = po.Quantity,
                         ProductName = po.Product.Name
                     }))
-                }).FirstOrDefaultAsync();
+                })
+                .TagWith(nameof(GetById))
+                .FirstOrDefaultAsync();
 
             return order;
         }

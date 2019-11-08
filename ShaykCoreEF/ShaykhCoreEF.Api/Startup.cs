@@ -32,7 +32,10 @@ namespace ShaykhCoreEF.Api
             builder.UserID = ShaykhCoreEFCredentials["UserId"];
             builder.Password = ShaykhCoreEFCredentials["Password"];
 
-            services.AddDbContext<ShaykhCoreEFContext>(options => options.UseSqlServer(builder.ConnectionString));
+            services.AddDbContext<ShaykhCoreEFContext>(options => 
+                options.UseSqlServer(builder.ConnectionString).
+                    EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging"))
+            );
 
             services.AddControllers();
             services.AddApplicationInsightsTelemetry();
