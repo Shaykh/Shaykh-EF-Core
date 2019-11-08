@@ -21,3 +21,8 @@ Command DotNET Core
 
 * Commande pour lister les contraintes de clé primaire et de clé étrangère sur les tables de la base de données :
     db -i $setupWorkingDirectory/listkeys.sql -Y 35
+
+* Commande de lancement de l'app en mode dev :
+    dotnet ./bin/Debug/netcoreapp3.0/ShaykhCoreEF.Api.dll \
+    --environment Development \
+    > $srcWorkingDirectory/ShaykhCoreEF.Api.log &

@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Data.SqlClient;
-// Add the ShaykhCoreEF.DataAccess.Services using statement
+using ShaykhCoreEF.DataAccess.Services;
 
 namespace ShaykhCoreEF.Api
 {
